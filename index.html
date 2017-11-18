@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form</title>
+</head>
+<body>
+<div class="container">
+    <form action="#">
+        <section>
+            <div class="address">
+                <input list="countries" name="fromCountry">
+                <input type="text" id="from_addr" name="fromAddr" placeholder="Zip code, Address">
+                <input list="countries" name="toCountry">
+                <input type="text" id="to_addr" name="toAddr" placeholder="Zip code, Address">
+                <datalist id="countries">
+                    <option value="Belarus">
+                    <option value="Belgium">
+                    <option value="Ukraine">
+                </datalist>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="type_item_0" name="type_item_0" value="parcel">
+                <label>Number of pallets:<input type="number" id="num_item_0" name="num_item_0" min="1" value="1"
+                                                required></label>
+                <label>Height:<input type="number" id="height_item_0" name="height_item_0" required></label>
+                <label>Weight:<input type="number" id="weight_item_0" name="weight_item_0" required></label>
+            </div>
+        </section>
+        <section>
+            <button type="button"> - Remove</button>
+            <button type="button"> + Add parcell or pallet</button>
+            <button type="submit">Quote & Book</button>
+        </section>
+    </form>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+</script>
+<script src="js/app.js"></script>
+</body>
+</html>
