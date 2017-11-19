@@ -5,6 +5,7 @@
 
 # User-specific stuff:
 .idea
+.node-modules
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
