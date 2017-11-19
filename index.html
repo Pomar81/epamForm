@@ -6,12 +6,12 @@
 </head>
 <body>
 <div class="container">
-    <form action="#">
-        <section>
+    <form action="#" id="form">
+
             <div class="address">
-                <input list="countries" name="fromCountry">
+                <input id="from_country" list="countries" name="fromCountry">
                 <input type="text" id="from_addr" name="fromAddr" placeholder="Zip code, Address">
-                <input list="countries" name="toCountry">
+                <input id="to_country" list="countries" name="toCountry">
                 <input type="text" id="to_addr" name="toAddr" placeholder="Zip code, Address">
                 <datalist id="countries">
                     <option value="Belarus">
@@ -20,18 +20,15 @@
                 </datalist>
             </div>
             <div class="item">
-                <input type="checkbox" id="type_item_0" name="type_item_0" value="parcel">
-                <label>Number of pallets:<input type="number" id="num_item_0" name="num_item_0" min="1" value="1"
-                                                required></label>
-                <label>Height:<input type="number" id="height_item_0" name="height_item_0" required></label>
-                <label>Weight:<input type="number" id="weight_item_0" name="weight_item_0" required></label>
+                <input type="checkbox" id="type_item_0" name="type" value="parcel">
+                <label>Number of pallets:<input type="number" id="num_item_0" name="num" min="1" value="1" required></label>
+                <label>Height:<input type="number" id="height_item_0" name="height" required></label>
+                <label>Weight:<input type="number" id="weight_item_0" name="weight" step="0.01" required></label>
             </div>
-        </section>
-        <section>
-            <button type="button"> - Remove</button>
-            <button type="button"> + Add parcell or pallet</button>
+
+            <button type="button" class="remBtn"> - Remove</button>
+            <button type="button" class="addBtn"> + Add parcell or pallet</button>
             <button type="submit">Quote & Book</button>
-        </section>
     </form>
 </div>
 <script
