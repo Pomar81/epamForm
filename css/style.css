@@ -1,0 +1,6 @@
+body{
+    background-color: #44a4ff;
+}
+[class^="col-"] {
+    display: flex;
+}

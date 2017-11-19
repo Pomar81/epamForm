@@ -43,7 +43,9 @@ $(function () {
         for (let item of this.items) {
             str += `${i++}:`;
             for (let key in item) {
-                str += ` ${key}: ${item[key]}`;
+                if (item.hasOwnProperty(key)) {
+                    str += ` ${key}: ${item[key]}`;
+                }
             }
             str += `\n`;
         }
@@ -117,7 +119,7 @@ $(function () {
             .map(function(ind, elm) {
                 const obj = {};
                 $(this).find('input')
-                    .each(function(ind) {
+                    .each(function() {
                         const name = $(this).attr("name");
                         if (name === 'type') {
                             obj[name] = $(this).prop("checked") ? 'parcell' : 'pallet';
