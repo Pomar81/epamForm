@@ -1,6 +1,17 @@
 body{
-    background-color: #44a4ff;
+    /*background-color: #44a4ff;*/
 }
-[class^="col-"] {
+/*.address div:first-of-type {*/
+    /*text-align: right;*/
+/*}*/
+
+/*.address input:nth-of-type(odd) {
+    margin-right: -4px;
+}*/
+.fromAddr,.toAddr {
     display: flex;
+}
+
+.itemData {
+    min-width: 220px;
 }
