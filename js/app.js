@@ -1,11 +1,13 @@
 $(function () {
         "use strict";
+        let itemId = 0;
 
+        // function for parsing address ----------------------
         function splitAddressStr(str) {
             "use strict";
             const obj = {
-                zip: "",
-                address: ""
+                zip: null,
+                address: null
             };
             const arr = str.split(',').filter(elm => elm !== "");
             if (arr.length > 0) {
@@ -19,72 +21,22 @@ $(function () {
             return obj;
         }
 
-
-        function genPalleteHtml(index) {
-            let str='';
-            str += '<div class="row item">';
-            str += '<div class="col-xs-2 ">';
-            str += `<input type="checkbox" id="type_item_${index}" name="type_item_${index}" value="parcel"></div>`;
-            str += `<div class="col-xs-10 itemData">`;
-            str += `<div class="form-group">`;
-            str += `<label for="num_item_${index}">Number of pallets:</label>`;
-            str += `<div class="input-group">`;
-            str += `<input type="number" class="form-control" id="num_item_${index}" name="num_item_${index}" min="1" value="1" required>`;
-            str += `<span class="input-group-addon">Pcs</span></div></div>`;
-            str += `<div class="form-group">`;
-            str += `<label for="height_item_${index}">Height:</label>`;
-            str += `<div class="input-group">`;
-            str += ` <input type="number" class="form-control" id="height_item_${index}" name="height_item_${index}" required>`
-            str += ` <span class="input-group-addon">Cm</span></div></div>`;
-            str += `<div class="form-group">`;
-            str +=  `<label for="weight_item_{index}">Weight:</label>`;
-            str += ` <div class="input-group">`;
-            str += ` <input type="number" class="form-control" id="weight_item_${index}" name="weight_item_${index}" step="0.01" required>`
-            str +=`<span class="input-group-addon">Kg</span></div></div></div></div>`;
-            return str;
-
-        }
-        function genParselHtml(index) {
-            let str='';
-            str += '<div class="row item">';
-            str += '<div class="col-xs-2 ">';
-            str += `<input type="checkbox" id="type_item_${index}" name="type_item_${index}" value="parcel"></div>`;
-            str += `<div class="col-xs-10 itemData">`;
-            str += `<div class="form-group">`;
-            str += `<label for="num_item_${index}">Number of pallets:</label>`;
-            str += `<div class="input-group">`;
-            str += `<input type="number" class="form-control" id="num_item_${index}" name="num_item_${index}" min="1" value="1" required>`;
-            str += `<span class="input-group-addon">Pcs</span></div></div>`;
-            str += `<div class="form-group">`;
-            str += `<label for="height_item_${index}">Height:</label>`;
-            str += `<div class="input-group">`;
-            str += ` <input type="number" class="form-control" id="height_item_${index}" name="height_item_${index}" required>`
-            str += ` <span class="input-group-addon">Cm</span></div></div>`;
-            str += `<div class="form-group">`;
-            str +=  `<label for="weight_item_{index}">Weight:</label>`;
-            str += ` <div class="input-group">`;
-            str += ` <input type="number" class="form-control" id="weight_item_${index}" name="weight_item_${index}" step="0.01" required>`
-            str +=`<span class="input-group-addon">Kg</span></div></div></div></div>`;
-            return str;
-
-        }
-
-
-        // object for form data
+        // generating object for form data --------------------
         const formData = {
             from: {
-                country: "",
-                zipCode: "",
-                address: "",
+                country: null,
+                zipCode: null,
+                address: null,
             },
             to: {
-                country: "",
-                zipCode: "",
-                address: "",
+                country: null,
+                zipCode: null,
+                address: null,
             },
             items: [],
         };
 
+        // function fot print formData to console --------------
         formData.toString = function () {
             let str;
             str = `from: ${this.from.country} ${this.from.zipCode} ${this.from.address}\n`;
@@ -104,7 +56,7 @@ $(function () {
             return str;
         };
 
-        // filling datalist
+        // function for filling dataList datalist --------------------
         function fillDataList(id, list) {
             let str = "";
             for (let item of list) {
@@ -113,42 +65,55 @@ $(function () {
             $(`#${id}`).append(str);
         }
 
+        // initialization -------------------------
+        //1. fill cointries dataList
+        fillDataList('countries', ["Australia", "Belarus", "France", "Ukraine"]);
+        //2. init first checkbox
+        initCheckboxHandlers(0);
+        //3.
 
-        //  event handler for selector parcel/pallet
-        function changeItemHandler(itemNum) {
-            $('#type_item_' + itemNum).change(function () {
-                $(this).nextAll().remove();
-                let str = "";
-                if ($(this).prop("checked")) {
-                    str += `<label>Weight:<input type="number" id="weight_item_${itemNum}" name="weight_item_${itemNum}" step="0.01" required></label>\n`;
-                    str += `<label>Length:<input type="number" id="length_item_${itemNum}" name="length_item_${itemNum}" required></label>\n`;
-                    str += `<label>Height:<input type="number" id="height_item_${itemNum}" name="height_item_${itemNum}" required></label>\n`;
-                    str += `<label>Width:<input type="number" id="width_item_${itemNum}" name="width_item_${itemNum}" required></label>\n`;
-                } else {
-                    str += `<label>Number of pallets:<input type="number" id="num_item_${itemNum}" name="num_item_${itemNum}" min="1" value="1" required></label>\n`;
-                    str += `<label>Height:<input type="number" id="height_item_${itemNum}" name="height_item_${itemNum}" required></label>\n`;
-                    str += `<label>Weight:<input type="number" id="weight_item_${itemNum}" name="weight_item_${itemNum}" step="0.01" required></label>\n`;
-                }
-                $(this).parent().append(str);
-            });
+        // event handler for add button -------------------
+        $('.addBtn').click(function () {
+            itemId++;
+            const $lastItem = $('form .item').last();
+            // const itemNum = +($lastItem.find('[type="checkbox"]').attr('id').slice(10)) + 1;
+            const $newRow = $('.template1').clone().addClass('itemWrapper').removeClass('template1').removeAttr('style');
+            const htmlStr = ($newRow.html()).replace(/{%1}/ig, itemId);
+            $('.btnRow').before($newRow.html(htmlStr));
+            initCheckboxHandlers(itemId);
+        });
+
+
+        //  event handler for selector parcel/pallet -----------------------
+        function initCheckboxHandlers(id) {
+            $('#type_item_' + id).bootstrapToggle()
+                .change(function () {
+                    $(this).parents('.item').find('.itemData').remove();
+
+
+                    if ($(this).prop("checked")) {
+                        const elms =$('.template1 .itemData').clone().each(function(){
+                            $(this).html($(this).html().replace(/{%1}/ig, itemId));
+                        });
+                        $(this).parents('.item').append(elms);
+                    } else {
+                        const elms =$('.template2 .itemData').clone().each(function(){
+                            $(this).html($(this).html().replace(/{%2}/ig, itemId));
+                        });
+                        $(this).parents('.item').append(elms);
+                    }
+                });
+
         }
 
 
-// event handler for add button
-        $('.addBtn').click(function () {
-            const $lastItem = $('.item').last();
-            if ($lastItem.length) {
-                const itemNum = +($lastItem.find('[type="checkbox"]').attr('id').slice(10)) + 1;
-                let str = genPalleteHtml(itemNum);
-                $lastItem.after(genPalleteHtml(itemNum));
-                changeItemHandler(itemNum);
-            }
-        });
-
-// event handler for remove button
+        // event handler for remove button -----------------------
         $('.remBtn').click(function () {
-            const $item = $('.item');
-            if ($item.length > 1) {
+            if (itemId) {
+                itemId--;
+            }
+            const $item = $('.itemWrapper');
+            if ($item.length) {
                 $item.last().remove();
             }
         });
@@ -157,16 +122,16 @@ $(function () {
         $('#form').submit(function (event) {
             event.preventDefault();
             // parsing addresses
-            formData.from.country = $('#from_country').val();
+            formData.from.country = $('#from_country').val() || null;
             let addr = splitAddressStr($('#from_addr').val());
             formData.from.zipCode = addr.zip;
             formData.from.address = addr.address;
-            formData.to.country = $('#to_country').val();
+            formData.to.country = $('#to_country').val() || null;
             addr = splitAddressStr($('#to_addr').val());
             formData.to.zipCode = addr.zip;
             formData.to.address = addr.address;
             // parsing items
-            formData.items = $('.item')
+            formData.items = $('form .item')
                 .map(function (ind, elm) {
                     const obj = {};
                     $(this).find('input')
@@ -185,12 +150,6 @@ $(function () {
             console.log(formData.toString());
 
         })
-
-        // adding event handler for the first item
-        changeItemHandler(0);
-
-        // filling country list
-        fillDataList('countries', ["Australia", "Belarus", "France", "Ukraine"]);
     }
 );
 

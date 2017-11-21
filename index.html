@@ -6,6 +6,7 @@
     <title>form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
 
@@ -14,127 +15,177 @@
 <div class="container">
     <form action="#" id="form">
 
-        <div class="address">
-            <div class="row">
-                <div class="col-xs-6 fromAddr">
-                    <input id=" from_country" list="countries" name="fromCountry"
-                           class="form-control btn-primary">
-                    <input type="text" id="from_addr" name="fromAddr" placeholder="Zip code, Address"
-                           class="form-control">
-                </div>
-
-                <div class="col-xs-6 toAddr"><input id="to_country" list="countries" name="toCountry"
-                                                    class="form-control btn-primary">
-                    <input type="text" id="to_addr" name="toAddr" placeholder="Zip code, Address"
-                           class="form-control">
-                </div>
-
-                <datalist id="countries">
-                </datalist>
-            </div>
-        </div>
-
-        <div class="row item">
-            <div class="col-xs-12 col-md-2 itemSel">
-                <input type="checkbox" id="type_item_0" name="type_item_0" value="parcel">
-            </div>
-            <div class="col-xs-12 col-md-2 itemData">
-                <div class="form-group">
-                    <label for="num_item_0">Number of pallets:</label>
-                    <div class="input-group">
-                        <input type="number" class="form-control" id="num_item_0" name="num_item_0" min="1"
-                               value="1"
-                               required>
-                        <span class="input-group-addon">Pcs</span>
+        <div class="headWrapper">
+            <div class="address">
+                <div class="row">
+                    <div class="col-xs-6 fromAddr">
+                        <input id="from_country" list="countries" name="fromCountry"
+                               class="form-control btn-primary">
+                        <input type="text" id="from_addr" name="fromAddr" placeholder="Zip code, Address"
+                               class="form-control">
                     </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-2 itemData">
-                <div class="form-group">
-                    <label for="height_item_0">Height:</label>
-                    <div class="input-group">
-                        <input type="number" class="form-control" id="height_item_0" name="height_item_0"
-                               required>
-                        <span class="input-group-addon">Cm</span>
+
+                    <div class="col-xs-6 toAddr"><input id="to_country" list="countries" name="toCountry"
+                                                        class="form-control btn-primary">
+                        <input type="text" id="to_addr" name="toAddr" placeholder="Zip code, Address"
+                               class="form-control">
                     </div>
+
+                    <datalist id="countries">
+                    </datalist>
                 </div>
             </div>
 
-            <div class="col-xs-12 col-md-2 itemData">
-                <div class="form-group">
-                    <label for="weight_item_0">Weight:</label>
-                    <div class="input-group">
-                        <input type="number" class="form-control" id="weight_item_0" name="weight_item_0"
-                               step="0.01"
-                               required>
-                        <span class="input-group-addon">Kg</span>
+            <div class="row item">
+                <div class="col-xs-12 col-md-2 itemSel">
+                    <div class="form-group pseudolabel">
+                        <input type="checkbox" id="type_item_0" name="type_item_0" value="parcell"
+                               data-on="PARCEL" data-off="PALLET">
                     </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <div class="row">
-                <div class="col-xs-12  col-md-2">
-                    <input type="checkbox" id="type_item_1" name="type_item_1" value="parcel">
                 </div>
 
                 <div class="col-xs-12 col-md-2 itemData">
                     <div class="form-group">
-                        <label for="weight_item_1">Weight:</label>
+                        <label for="num_item_0">Number of pallets:</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="weight_item_1" name="weight_item_1"
+                            <input type="number" class="form-control" id="num_item_0" name="num_item_0" min="1"
+                                   required>
+                            <span class="input-group-addon">Pcs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2 itemData">
+                    <div class="form-group">
+                        <label for="height_item_0">Height:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="height_item_0" name="height_item_0"
+                                   required>
+                            <span class="input-group-addon">Cm</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2 itemData">
+                    <div class="form-group">
+                        <label for="weight_item_0">Weight:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="weight_item_0" name="weight_item_0"
                                    step="0.01"
                                    required>
                             <span class="input-group-addon">Kg</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-2 itemData">
-                    <div class="form-group">
-                        <label for="length_item_1">Length:</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="length_item_1" name="length_item_1" min="1"
-                                   value="1"
-                                   required>
-                            <span class="input-group-addon">Cm</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-2 itemData">
-                    <div class="form-group">
-                        <label for="width_item_1">Length:</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="width_item_1" name="width_item_1" min="1"
-                                   value="1"
-                                   required>
-                            <span class="input-group-addon">Cm</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-2 itemData">
-                    <div class="form-group">
-                        <label for="height_item_1">Height:</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="height_item_1" name="height_item_1" required>
-                            <span class="input-group-addon">Cm</span>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
-
-        <div class="row">
+        <div class="row btnRow">
             <div class="col-md-12">
                 <button type="button" class="remBtn btn btn-primary"> - Remove</button>
                 <button type="button" class="addBtn btn btn-primary"> + Add parcell or pallet</button>
-                <button type="submit" class="btn btn-danger">Quote & Book</button>
+                <button type="submit" class="submBtn btn btn-danger">Quote & Book</button>
             </div>
         </div>
     </form>
 </div>
+
+<!--ШАБЛОН PARSEL-->
+
+<div class="template1" style="display: none;">
+    <div class="row item">
+        <div class="col-xs-12  col-md-2">
+            <div class="form-group pseudolabel">
+                <input type="checkbox" id="type_item_{%1}" name="type_item_{%1}" value="parcell"
+                       data-on="PARCEL" data-off="PALLET">
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2 itemData">
+            <div class="form-group">
+                <label for="weight_item_{%1}">Weight:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="weight_item_{%1}" name="weight_item_{%1}"
+                           step="0.01"
+                           required>
+                    <span class="input-group-addon">Kg</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2 itemData">
+            <div class="form-group">
+                <label for="length_item_{%1}">Length:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="length_item_{%1}" name="length_item_{%1}" min="1"
+                           required>
+                    <span class="input-group-addon">Cm</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2 itemData">
+            <div class="form-group">
+                <label for="width_item_{%1}">Length:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="width_item_{%1}" name="width_item_{%1}" min="1"
+                           required>
+                    <span class="input-group-addon">Cm</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2 itemData">
+            <div class="form-group">
+                <label for="height_item_{%1}">Height:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="height_item_{%1}" name="height_item_{%1}" required>
+                    <span class="input-group-addon">Cm</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----------------------------->
+
+<!--ШАБЛОН PALLETE -->
+<div class="template2" style="display: none;">;
+    <div class="row item">
+        <div class="col-xs-12 col-md-2 itemSel">
+            <div class="form-group pseudolabel">
+                <input type="checkbox" id="type_item_{%2}" name="type_item_{%2}" value="parcell"
+                       data-on="PARCEL" data-off="PALLET">
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2 itemData">
+            <div class="form-group">
+                <label for="num_item_{%2}">Number of pallets:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="num_item_{%2}" name="num_item_{%2}" min="1"
+                           required>
+                    <span class="input-group-addon">Pcs</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2 itemData">
+            <div class="form-group">
+                <label for="height_item_{%2}">Height:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="height_item_{%2}" name="height_item_{%2}"
+                           required>
+                    <span class="input-group-addon">Cm</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2 itemData">
+            <div class="form-group">
+                <label for="weight_item_{%2}">Weight:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" id="weight_item_{%2}" name="weight_item_{%2}"
+                           step="0.01"
+                           required>
+                    <span class="input-group-addon">Kg</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----------------------------->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -142,7 +193,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 <script src="js/app.js"></script>
 
